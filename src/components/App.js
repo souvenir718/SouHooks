@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useClick } from './useClick';
 import { useInput } from './useInput';
 import { useTabs } from './useTabs';
 import { useTitle } from './useTitle';
@@ -19,8 +20,11 @@ const App = () => {
     const name = useInput('', maxLen);
     const { currentItem, changeItem } = useTabs(0, content);
     const titleUpdater = useTitle('Loading....');
-
     setTimeout(() => titleUpdater('Home'), 5000);
+
+    const sayHello = () => console.log('say Hello');
+
+    const title = useClick(sayHello);
 
     return (
         <div className="App">
@@ -33,7 +37,9 @@ const App = () => {
                 ))}
             </div>
             <div>{currentItem.content}</div>
-            <div></div>
+            <div>
+                <h1 ref={title}>Hi</h1>
+            </div>
         </div>
     );
 };
