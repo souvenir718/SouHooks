@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
+import { useBeforeLeave } from './useBeforeLeave';
 import { useClick } from './useClick';
 import { useConfirm } from './useConfirm';
+import { useFadeIn } from './useFadeIn';
 import { useInput } from './useInput';
 import { usePreventLeave } from './usePreventLeave';
 import { useTabs } from './useTabs';
@@ -17,6 +19,28 @@ const content = [
     },
 ];
 
+const useNetwork = (onChange) => {
+    const [status, setStatus] = useState(navigator.onLine);
+
+    const handleChange = () => {
+        if (typeof onChange === 'function') {
+            onChange(navigator.onLine);
+        }
+        setStatus(navigator.onLine);
+    };
+
+    useEffect(() => {
+        window.addEventListener('online', handleChange);
+        window.addEventListener('offline', handleChange);
+        () => {
+            window.removeEventListener('online', handleChange);
+            window.removeEventListener('offline', handleChange);
+        };
+    }, []);
+
+    return status;
+};
+
 const App = () => {
     const maxLen = (value) => value.length < 10;
     const name = useInput('', maxLen);
@@ -32,6 +56,17 @@ const App = () => {
     const confirmDelete = useConfirm('Are you sure', deleteWord, abort);
 
     const { enablePrevent, disablePrevent } = usePreventLeave();
+
+    const begForLife = () => console.log('please dont leave');
+    useBeforeLeave(begForLife);
+
+    const fadeInH1 = useFadeIn(1, 2);
+    const fadeInP = useFadeIn(5, 10);
+
+    const handleNeworkChange = (online) => {
+        console.log(online ? 'Online' : 'Offline');
+    };
+    const onLine = useNetwork(handleNeworkChange);
     return (
         <div className="App">
             <h2>name : {name.value}</h2>
@@ -53,6 +88,14 @@ const App = () => {
             <div>
                 <button onClick={enablePrevent}>Protect</button>
                 <button onClick={disablePrevent}>Unprotect</button>
+            </div>
+
+            <div>
+                <h1 {...fadeInH1}>Hello</h1>
+                <p {...fadeInP}>lorem adfdaf ad</p>
+            </div>
+            <div>
+                <h1>{onLine ? 'OnLine' : 'OffLine'}</h1>
             </div>
         </div>
     );
