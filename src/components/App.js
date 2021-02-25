@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useClick } from './useClick';
 import { useConfirm } from './useConfirm';
 import { useInput } from './useInput';
+import { usePreventLeave } from './usePreventLeave';
 import { useTabs } from './useTabs';
 import { useTitle } from './useTitle';
 
@@ -29,6 +30,8 @@ const App = () => {
     const deleteWord = () => console.log('Delete');
     const abort = () => console.log('reject');
     const confirmDelete = useConfirm('Are you sure', deleteWord, abort);
+
+    const { enablePrevent, disablePrevent } = usePreventLeave();
     return (
         <div className="App">
             <h2>name : {name.value}</h2>
@@ -45,6 +48,11 @@ const App = () => {
             </div>
             <div>
                 <button onClick={confirmDelete}>Delete the word</button>
+            </div>
+
+            <div>
+                <button onClick={enablePrevent}>Protect</button>
+                <button onClick={disablePrevent}>Unprotect</button>
             </div>
         </div>
     );
