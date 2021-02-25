@@ -4,7 +4,9 @@ import { useClick } from './useClick';
 import { useConfirm } from './useConfirm';
 import { useFadeIn } from './useFadeIn';
 import { useInput } from './useInput';
+import { useNetwork } from './useNetwork';
 import { usePreventLeave } from './usePreventLeave';
+import { useScroll } from './useScroll';
 import { useTabs } from './useTabs';
 import { useTitle } from './useTitle';
 
@@ -18,28 +20,6 @@ const content = [
         content: "I'm the content of the Section 2",
     },
 ];
-
-const useNetwork = (onChange) => {
-    const [status, setStatus] = useState(navigator.onLine);
-
-    const handleChange = () => {
-        if (typeof onChange === 'function') {
-            onChange(navigator.onLine);
-        }
-        setStatus(navigator.onLine);
-    };
-
-    useEffect(() => {
-        window.addEventListener('online', handleChange);
-        window.addEventListener('offline', handleChange);
-        () => {
-            window.removeEventListener('online', handleChange);
-            window.removeEventListener('offline', handleChange);
-        };
-    }, []);
-
-    return status;
-};
 
 const App = () => {
     const maxLen = (value) => value.length < 10;
@@ -67,8 +47,10 @@ const App = () => {
         console.log(online ? 'Online' : 'Offline');
     };
     const onLine = useNetwork(handleNeworkChange);
+
+    const { y } = useScroll();
     return (
-        <div className="App">
+        <div className="App" style={{ height: '1000vh' }}>
             <h2>name : {name.value}</h2>
             <input placeholder="Name" {...name} />
 
@@ -97,6 +79,8 @@ const App = () => {
             <div>
                 <h1>{onLine ? 'OnLine' : 'OffLine'}</h1>
             </div>
+
+            <h1 style={{ color: y > 100 ? 'red' : 'blue' }}>Hi</h1>
         </div>
     );
 };
