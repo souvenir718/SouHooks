@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useClick } from './useClick';
+import { useConfirm } from './useConfirm';
 import { useInput } from './useInput';
 import { useTabs } from './useTabs';
 import { useTitle } from './useTitle';
@@ -25,7 +26,9 @@ const App = () => {
     const sayHello = () => console.log('say Hello');
 
     const title = useClick(sayHello);
-
+    const deleteWord = () => console.log('Delete');
+    const abort = () => console.log('reject');
+    const confirmDelete = useConfirm('Are you sure', deleteWord, abort);
     return (
         <div className="App">
             <h2>name : {name.value}</h2>
@@ -39,6 +42,9 @@ const App = () => {
             <div>{currentItem.content}</div>
             <div>
                 <h1 ref={title}>Hi</h1>
+            </div>
+            <div>
+                <button onClick={confirmDelete}>Delete the word</button>
             </div>
         </div>
     );
