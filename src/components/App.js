@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react';
 import { useInput } from './useInput';
 import { useTabs } from './useTabs';
+import { useTitle } from './useTitle';
 
 const content = [
     {
@@ -16,6 +18,9 @@ const App = () => {
     const maxLen = (value) => value.length < 10;
     const name = useInput('', maxLen);
     const { currentItem, changeItem } = useTabs(0, content);
+    const titleUpdater = useTitle('Loading....');
+
+    setTimeout(() => titleUpdater('Home'), 5000);
 
     return (
         <div className="App">
@@ -28,6 +33,7 @@ const App = () => {
                 ))}
             </div>
             <div>{currentItem.content}</div>
+            <div></div>
         </div>
     );
 };
