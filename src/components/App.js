@@ -7,6 +7,7 @@ import { useFadeIn } from './useFadeIn';
 import { useFullScreen } from './useFullScreen';
 import { useInput } from './useInput';
 import { useNetwork } from './useNetwork';
+import { useNotification } from './useNotification';
 import { usePreventLeave } from './usePreventLeave';
 import { useScroll } from './useScroll';
 import { useTabs } from './useTabs';
@@ -56,6 +57,8 @@ const App = () => {
         console.log(isFull ? 'Full' : 'Small');
     };
     const { element, triggerFull, exitFull } = useFullScreen(onFullS);
+
+    const triggerNotif = useNotification('Can I  do it?', { body: 'I can do it' });
     return (
         <div className="App" style={{ height: '1000vh' }}>
             <h2>name : {name.value}</h2>
@@ -94,6 +97,9 @@ const App = () => {
                 <button onClick={exitFull}>Exit Fullscreen</button>
             </div>
             <button onClick={triggerFull}>Make Fullscreen</button>
+            <div>
+                <button onClick={triggerNotif}>Hello</button>
+            </div>
         </div>
     );
 };
