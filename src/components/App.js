@@ -1,5 +1,6 @@
 import { elementType } from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
+import { useAxios } from './useAxios';
 import { useBeforeLeave } from './useBeforeLeave';
 import { useClick } from './useClick';
 import { useConfirm } from './useConfirm';
@@ -59,6 +60,9 @@ const App = () => {
     const { element, triggerFull, exitFull } = useFullScreen(onFullS);
 
     const triggerNotif = useNotification('Can I  do it?', { body: 'I can do it' });
+
+    const { loading, data, error, refetch } = useAxios({ url: 'https://yts.mx/api/v2/list_movies.json' });
+    // console.log(JSON.stringify(data));
     return (
         <div className="App" style={{ height: '1000vh' }}>
             <h2>name : {name.value}</h2>
@@ -99,6 +103,11 @@ const App = () => {
             <button onClick={triggerFull}>Make Fullscreen</button>
             <div>
                 <button onClick={triggerNotif}>Hello</button>
+            </div>
+            <div>
+                <h1>{data && data.status}</h1>
+                <h1>{loading && 'Loading'}</h1>
+                <button onClick={refetch}>Refetch</button>
             </div>
         </div>
     );
