@@ -1,0 +1,26 @@
+{
+    "name": "souhooks",
+    "version": "1.0.0",
+    "description": "React Hook to update your document's title.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/souvenir718/SouHooks.git"
+    },
+    "keywords": [
+        "hooks"
+    ],
+    "author": "souvenir718",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/souvenir718/SouHooks/issues"
+    },
+    "homepage": "https://github.com/souvenir718/SouHooks#readme",
+    "peerDependencies": {
+        "react": "^17.0.1",
+        "react-dom": "^17.0.1"
+    }
+}
