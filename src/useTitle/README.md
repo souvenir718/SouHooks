@@ -23,3 +23,7 @@ function App() {
   return <h1>Welcome</h1>;
 }
 ```
+
+npm login
+
+npm publish --access public

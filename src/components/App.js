@@ -12,7 +12,7 @@ import { useNotification } from './useNotification';
 import { usePreventLeave } from './usePreventLeave';
 import { useScroll } from './useScroll';
 import { useTabs } from './useTabs';
-import { useTitle } from './useTitle';
+// import { useTitle } from '../useTitle/useTitle';
 
 const content = [
     {
@@ -29,8 +29,8 @@ const App = () => {
     const maxLen = (value) => value.length < 10;
     const name = useInput('', maxLen);
     const { currentItem, changeItem } = useTabs(0, content);
-    const titleUpdater = useTitle('Loading....');
-    setTimeout(() => titleUpdater('Home'), 5000);
+    // const titleUpdater = useTitle('Loading....');
+    // setTimeout(() => titleUpdater('Home'), 5000);
 
     const sayHello = () => console.log('say Hello');
 

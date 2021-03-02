@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 export const useHover = (onHover) => {
-    if (typeof onClick !== 'function') {
+    if (typeof onHover !== 'function') {
         return;
     }
     const element = useRef();
